@@ -18,35 +18,13 @@ import ua.work.home.customviewhomework.R;
  * Created by Andrii Papai on 29.10.2017.
  */
 
-public class TextButtonView extends RelativeLayout {
+public class TextButtonCustomView extends RelativeLayout {
     private Context context;
     private EditText text;
     private ImageView button;
-    private List<String> list;
-    private ViewGroup rootView;
 
-    public TextButtonView(Context context) {
+    public TextButtonCustomView(Context context) {
         super(context);
-        this.context = context;
-        init();
-    }
-
-    public TextButtonView(Context context, List<String> list, ViewGroup rootView) {
-        super(context);
-        this.context = context;
-        this.list = list;
-        this.rootView = rootView;
-        init();
-    }
-
-    public TextButtonView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        this.context = context;
-        init();
-    }
-
-    public TextButtonView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
         this.context = context;
         init();
     }
@@ -61,19 +39,12 @@ public class TextButtonView extends RelativeLayout {
             public void onClick(View view) {
                 text.setEnabled(false);
                 button.setVisibility(INVISIBLE);
-                if (list != null) {
-                    list.add(getText());
-                }
-                addNewView();
+                callOnClick();
             }
         });
     }
 
-    private String getText() {
-        return text.getText() != null ? text.getText().toString() : "";
-    }
-
-    private void addNewView() {
-        rootView.addView(new TextButtonView(context, list, rootView));
+    public String getTextCustomText() {
+        return text.getText().toString();
     }
 }

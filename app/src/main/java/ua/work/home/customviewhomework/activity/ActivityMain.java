@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 
 import ua.work.home.customviewhomework.App;
 import ua.work.home.customviewhomework.R;
-import ua.work.home.customviewhomework.view.TextButtonView;
+import ua.work.home.customviewhomework.view.TextButtonCustomView;
 
 public class ActivityMain extends AppCompatActivity {
 
@@ -36,7 +36,15 @@ public class ActivityMain extends AppCompatActivity {
     }
 
     private void addCustomView() {
-        TextButtonView view = new TextButtonView(this, App.getList(), mRootView);
-        mRootView.addView(view);
+        final TextButtonCustomView customView = new TextButtonCustomView(this);
+
+        customView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addCustomView();
+                App.getList().add(customView.getTextCustomText());
+            }
+        });
+        mRootView.addView(customView);
     }
 }
